@@ -140,29 +140,31 @@ def service_provider_dashboard_view(request):
 
 @login_required
 def update_booking_status_view(request, booking_id):
+    print("request.POST:", request.POST)
     if request.method == 'POST':
+        print("request.POST:", request.POST)
         new_status = request.POST.get('status')
         notes = request.POST.get('service_provider_notes')
         if new_status in dict(Booking.STATUS_CHOICES):
             booking = Booking.objects.get(id=booking_id)
             booking.status = new_status
-            booking.owner_notes = notes
+            booking.service_provider_notes = notes
             booking.save()
             return redirect('service_provider_dashboard')
     return HttpResponseBadRequest('Invalid form submission')
+
+def _get_service_rating(service):
+    reviews = Review.objects.filter(service=service)
+    if reviews:
+        return sum([review.rating for review in reviews]) / len(reviews), len(reviews)
+    return ()
 
 def service_list_view(request):
     services = Service.objects.all()
     services_and_average_rates = {}
     
     for service in services:
-        reviews = Review.objects.filter(service=service)
-        amount_of_reviews = len(reviews)
-        if reviews:
-            average_rating = sum([review.rating for review in reviews]) / len(reviews)
-        else:
-            average_rating = 0
-        services_and_average_rates[service] = (average_rating, amount_of_reviews)
+        services_and_average_rates[service] = _get_service_rating(service)
     
     return render(request, 'service_list.html', {'services_and_rates': services_and_average_rates})
 
