@@ -1,0 +1,74 @@
+<!-- base.html -->
+{% load custom_filters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <title>{% block title %}MotoMatch{% endblock %}</title>
+    <!-- CSS -->
+    <link
+    rel="preload"
+    as="style"
+    href="{% static 'css/style.css' %}"
+    onload="this.rel = 'stylesheet'"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Karla&family=Markazi+Text:wght@500&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+    <header>
+        <img src="{% static 'img/cars_top_narrow.jpg' %}" alt="Car" class = "header_image">
+        <h1>MotoMatch</h1>
+        {% if user.is_authenticated %}
+            
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class = "small_button">Logout</button>
+                </form>
+            
+        {% else %}
+            
+                <a href="{% url 'login' %}" >Login</a>/<a href="{% url 'register' %}" >Sign Up</a>
+        {% endif %}
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'service_list' %}">Garages</a></li>
+
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% if request.user|has_group:"Clients" %}
+                <li><a href="{% url 'booking_history' %}">Booking History</a></li>
+            {% elif request.user|has_group:"Service Providers"  %}
+                <li><a href="{% url 'service_provider_dashboard' %}">Garage Owner Dashboard</a></li>
+            {% endif %}
+        {% endif %}
+        </ul>
+    </nav>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <article>
+        <p>&copy; 2021 MotoMatch</p>
+      </article>
+</footer>
+
+</body>
+</html>

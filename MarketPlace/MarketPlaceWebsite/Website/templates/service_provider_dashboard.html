@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+  
+  <h2>Your Garages</h2>
+  <a href="{% url 'add_service' %}" class = "small_button">Add Garage</a>
+  {% if services %}
+    <ul>
+      {% for service in services %}
+        <li><b>{{ service.name }}</b> - {{ service.description }}</li>
+        <form method="post" action="{% url 'delete_service' service.id %}">
+          {% csrf_token %}
+          <button type="submit" class = "small_button">Delete</button>
+        </form>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No Garage found.</p>
+  {% endif %}
+  <h2>Your Bookings</h2>
+
+  {% if bookings %}
+    {% for booking in bookings %}
+          <h2><i>Booking ID: {{ booking.id }}</i></h2>
+          <table>
+            
+            <thead>
+              <tr>
+                <th>Garage</th>
+                <th>Client Name</th>
+                <th>Client Email</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Status</th>
+                <th>Client Notes</th>
+                <th>Garage Notes</th>
+                <th>Update Status</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>{{ booking.service.name }}</td>
+                  <td>{{booking.user.first_name}} {{booking.user.last_name}}</td>
+                  <td>{{booking.user.email}}</td>
+                  <td>{{ booking.check_in_date }}</td>
+                  <td>{{ booking.check_out_date }}</td>
+                  <td>{{ booking.status }}</td>
+                  <td>{{ booking.client_notes }}</td>
+                  <td>{{ booking.service_provider_notes}} </td>
+                  
+                  <td>
+                    <form method="post" action="{% url 'update_booking_status' booking.id %}">
+                      {% csrf_token %}
+                      <select name="status">
+                        {% for choice in booking.STATUS_CHOICES %}
+                          <option value="{{ choice.0 }}" {% if booking.status == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                      </select>
+                      <input type="text" name="service_provider_notes"  placeholder="Change notes...">
+                      <button type="submit" class = "small_button">Update</button>
+                    </form>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+          <h3>Car Details</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>License Plate</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Valid Inspection</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>{{ booking.car.identifier }}</td>
+                  <td>{{ booking.car.description }}</td>
+                  <td>{{ booking.car.field_1 }}</td>
+                  <td>{{ booking.car.field_2 }}</td>
+                  <td>{{ booking.car.field_3 }}</td>
+            
+          </table>
+        {% endfor %}
+  {% else %}
+    <p>No bookings found.</p>
+  {% endif %}
+{% endblock %}

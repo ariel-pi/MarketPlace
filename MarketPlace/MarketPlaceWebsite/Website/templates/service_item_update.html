@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    Update Car Details - MotoMatch
+{% endblock title %}
+{% block content %}
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Car Details</title>
+</head>
+<body>
+    <h1>Update Car Details</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="small_button">Update</button>
+    </form>
+</body>
+</html>
+{% endblock %}

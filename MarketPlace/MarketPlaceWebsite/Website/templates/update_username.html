@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Username</title>
+</head>
+<body>
+    <h1>Update Username</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="new_username">New Username:</label>
+        <input type="text" id="new_username" name="new_username">
+        <button type="submit" class = "small_button">Update</button>
+    </form>
+</body>
+</html>
+{% endblock %}

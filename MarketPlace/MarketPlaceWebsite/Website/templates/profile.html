@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+
+{% block title %}User Profile - MotoMatch{% endblock %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>My Profile</title>
+    </head>
+    <body>
+        <h2>My Profile</h2>
+        <div>
+            <p><b>Username: {{ profile.user.username }}</b></p>
+            <p>First Name: {{ profile.user.first_name }}</p>
+            <p>Last Name: {{ profile.user.last_name }}</p>
+            <p>Email: {{ profile.user.email }}</p>
+
+            
+        </div>
+        
+        
+        
+        <h3>Edit username and password</h3>
+        
+        <a href="{% url 'update_username' %}" >Update Username</a></br>
+        <a href="{% url 'update_password' %}">Update Password</a></br>
+        
+        {% if profile.user|has_group:"Clients" %}
+            <h2>My Cars</h2>
+            <ul>
+                {% for service_item in service_items %}
+                    <li>
+                        <strong>{{ service_item.description }}</strong> <br>
+                        <a href="{% url 'service_item_detail' service_item.identifier %}">View Details</a>
+                    
+                    </li>
+                {% empty %}
+                    <li>No Cars available.</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'add_service_item' %}" class = "small_button">Add Car</a>
+        {% endif %}
+            
+    </body>
+    </html>
+{% endblock %}

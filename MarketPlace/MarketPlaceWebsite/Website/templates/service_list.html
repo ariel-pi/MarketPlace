@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Garages - MotoMatch{% endblock %}
+
+{% block content %}
+        <h2>Explore our Garages</h2>
+        <p>Find the perfect place for your Car</p>
+
+        <h2>Garages</h2>
+        <section>
+            {% for service, rate_info in services_and_rates.items %}
+                <article>
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.description }}</p>
+                    <p>Location: {{ service.location }}</p>
+                    <p>Available Spaces: {{ service.available_spaces }}</p>
+                    <p>Rate: {{ rate_info.0 }}</p>
+                    <p>Rated By: {{ rate_info.1 }} users</p>
+                    <a href="{% url 'service_detail' service.id %}">View Details & Book</a>
+                </article>
+            {% endfor %}
+        </section>
+{% endblock %}

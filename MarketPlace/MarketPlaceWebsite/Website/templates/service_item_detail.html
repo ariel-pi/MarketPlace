@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ service_item.name }} Details</title>
+</head>
+<body>
+    <h2>{{ service_item.name }} details</h2>
+    <p><strong>License Plate:</strong> {{ service_item.identifier }}</p>
+    <p><strong>Manufacturer:</strong> {{ service_item.description }}</p>
+    <p><strong>Model:</strong> {{ service_item.field_1 }}</p>
+    <p><strong>Year:</strong> {{ service_item.field_2 }}</p>
+    <p><strong>Valid Inspection:</strong> {{ service_item.field_3 }}</p>
+  
+</body>
+<a href="{% url 'update_service_item' service_item.identifier %}" class="small_button"></ahref>Update Details</a>
+<form method="post" action="{% url 'delete_service_item' service_item.identifier %}">
+    {% csrf_token %}
+    <button type="submit" class = "small_button">Delete</button>
+  </form>
+</html>
+{% endblock %}

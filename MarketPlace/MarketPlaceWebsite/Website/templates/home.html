@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home - MotoMatch
+{% endblock %}
+
+{% block content %}
+    
+    <h2>Welcome to MotoMatch</h2>
+    <p>Find the perfect place for your car!</p>
+
+    <h2>Featured Garages</h2>
+    {% if featured_services %}
+    <section>
+        
+        
+            <article>
+                <h3>{{ featured_services.0.name }}</h3>
+                <img src="{% static 'img/car1.jpg' %}" class = "cropped-image">
+                <p>{{ featured_services.0.description }}</p>
+                <p>Location: {{ featured_services.0.location }}</p>
+                
+                <a href="{% url 'service_detail' featured_services.0.id %}">View Details & Book</a>
+            </article>
+            <article>
+                <h3>{{ featured_services.1.name }}</h3>
+                <img src="{% static 'img/car2.jpg' %}" class = "cropped-image">
+                <p>{{ featured_services.1.description }}</p>
+                <p>Location: {{ featured_services.1.location }}</p>
+                
+                <a href="{% url 'service_detail' featured_services.1.id %}">View Details & Book</a>
+            </article>
+            <article>
+                <h3>{{ featured_services.2.name }}</h3>
+                <img src="{% static 'img/car3.jpg' %}" class = "cropped-image">
+                <p>{{ featured_services.2.description }}</p>
+                <p>Location: {{ featured_services.2.location }}</p>
+                
+                <a href="{% url 'service_detail' featured_services.2.id %}">View Details & Book</a>
+            </article>
+        
+    </section>
+    {% else %}
+        <p>No featured garages available.</p>
+    {% endif %}
+    
+
+    
+{% endblock %}

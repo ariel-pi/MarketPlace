@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+
+{% block title %}{{ service.name }} - MotoMatch{% endblock %}
+
+{% block content %}
+    
+        <h2>{{ service.name }}</h2>
+        <p>{{ service.description }}</p>
+        <p>Location: {{ service.location }}</p>
+        <p> Contact Detailes: {{service.contact_details}}</p>
+    
+    <a href="{% url 'reviews' service.id %}">View Reviews</a>
+
+    
+        <h2>Book a Service</h2>
+        {% if error %}
+            <p class = "error_text">{{ error }}</p>
+        {% endif %}
+        {% if request.user|has_group:"Clients" %}
+            <form method="post" action="{% url 'booking' service.id %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="small_button">Book Now</button>
+            </form>
+        
+        {% elif not request.user|has_group:"Service Providers" %}
+            <p><a href="{% url 'login' %}">Log in</a> to book a service</p>
+        {% endif %}
+    
+{% endblock %}

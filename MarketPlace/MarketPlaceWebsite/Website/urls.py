@@ -1,0 +1,40 @@
+from django.urls import path
+from .views import (
+    home_view,
+    service_list_view,
+    service_detail_view,
+    delete_service_view,
+    booking_view,
+    add_service_view,
+    add_review_view,
+    review_view,
+    delete_review_view,
+    booking_history_view,
+    service_provider_dashboard_view,
+    update_booking_status_view,
+    add_service_item_view,
+    service_item_detail_view,
+    service_item_update_view,
+    service_item_delete_view,
+    about_view
+)
+
+urlpatterns = [
+    path('', home_view, name='home'),
+    path('services/', service_list_view, name='service_list'),
+    path('services/<int:service_id>/', service_detail_view, name='service_detail'),
+    path('services/<int:service_id>/delete/', delete_service_view, name='delete_service'),
+    path('services/<int:service_id>/book', booking_view, name='booking'),
+    path('services/add/', add_service_view, name='add_service'),
+    path('services/<int:service_id>/add-review/', add_review_view, name='add_review'),
+    path('services/<int:service_id>/reviews/', review_view, name='reviews'),
+    path('services/reviews/<int:review_id>/delete/', delete_review_view, name='delete_review'),
+    path('booking/history/', booking_history_view, name='booking_history'),
+    path('service_provider/dashboard/', service_provider_dashboard_view, name='service_provider_dashboard'),
+    path('update-booking-status/<int:booking_id>/', update_booking_status_view, name='update_booking_status'),
+    path('service_items/add-service-item/', add_service_item_view, name='add_service_item'),
+    path('service_items/<str:identifier>/delete/', service_item_delete_view, name='delete_service_item'),
+    path('service_items/<str:identifier>/', service_item_detail_view, name='service_item_detail'),
+    path('service_items/<str:identifier>/update/', service_item_update_view, name='update_service_item'),
+    path('about/', about_view, name='about'),
+]
