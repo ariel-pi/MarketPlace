@@ -201,7 +201,7 @@ def service_detail_view(request, service_id):
 
 def add_service_view(request):
     if request.method == 'POST':
-        form = ServiceForm(request.POST)
+        form = ServiceForm(request.POST, request.FILES)  # Pass request.FILES to handle file uploads
         if form.is_valid():
             service = form.save(commit=False)
             service.user = request.user
@@ -224,7 +224,7 @@ def delete_service_view(request, service_id):
         booking.save()
     service.delete()
     messages.success(request, 'Service has been successfully deleted.')
-    return redirect('owner_dashboard')
+    return redirect('service_provider_dashboard')
 
 def add_review_view(request, service_id):
     if request.method == 'GET':

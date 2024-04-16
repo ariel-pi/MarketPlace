@@ -18,6 +18,7 @@ class Service(models.Model):
     # map_location = models.URLField(default=DEFAULT_MAP_LOCATION, max_length=1000)
     contact_details = models.CharField(max_length=255)
     available_spaces = models.PositiveIntegerField()
+    image = models.ImageField(upload_to='service_images', default='service_images/default.jpg')
 
     def __str__(self):
         return self.name

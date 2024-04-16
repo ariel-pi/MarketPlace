@@ -69,7 +69,15 @@ class UpdatePasswordForm(PasswordChangeForm):
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Service
-        fields = ['name', 'description', 'location', 'contact_details', 'available_spaces']
+        fields = ['name', 'description', 'location', 'contact_details', 'available_spaces', 'image']
+        labels = {
+            'name': 'Service Name',
+            'description': 'Description',
+            'location': 'Location',
+            'contact_details': 'Contact Details',
+            'available_spaces': 'Available Spaces',
+            'image': 'Upload a photo',
+        }
 
 class ServiceItemForm(forms.ModelForm):
     class Meta:

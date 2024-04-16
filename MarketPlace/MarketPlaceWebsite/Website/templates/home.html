@@ -15,6 +15,7 @@
         {% for service, rate_info in services_and_rates %}
         <article>
             <h3>{{ service.name }}</h3>
+            <img src="{{ service.image.url }}" alt="{{ service.name }}">
             <p>{{ service.description }}</p>
             <p>Location: {{ service.location }}</p>
             <p>Available Spaces: {{ service.available_spaces }}</p>
