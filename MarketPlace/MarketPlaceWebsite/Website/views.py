@@ -24,15 +24,36 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 
-def highest_rated_service_providers():
-    #TODO: implement this method
-    service_providers = Service.objects.all()
-    return service_providers[:3]
+FEATURED_SERVICES_AMOUNT = 3
+
+def _get_services_and_rating(services = None):
+    if not services:
+        services = Service.objects.all()
+    services_and_average_rates = {}
+    
+    for service in services:
+        
+        reviews = Review.objects.filter(service=service)
+
+        if reviews:
+            average_rating = sum([review.rating for review in reviews]) / len(reviews)
+            amount_of_reviews = len(reviews)
+        else:
+            average_rating = 0
+            amount_of_reviews = 0
+        services_and_average_rates[service] = (average_rating, amount_of_reviews)
+    sorted_services = sorted(services_and_average_rates.items(), key=lambda x: x[1][0], reverse=True)
+
+    return sorted_services
+
+def _highest_rated_service_providers(service_amount):
+    services_and_average_rates = _get_services_and_rating()
+    return services_and_average_rates[:service_amount]
+    
 
 def home_view(request):
-    featured_service_providers = highest_rated_service_providers()
-    print("featured_service_providers:", featured_service_providers)
-    return render(request, 'home.html', {'featured_services': featured_service_providers})
+    featured_service_providers = _highest_rated_service_providers(FEATURED_SERVICES_AMOUNT)
+    return render(request, 'home.html', {'services_and_rates': featured_service_providers})
 
 def about_view(request):
     return render(request, 'about.html')
@@ -153,18 +174,16 @@ def update_booking_status_view(request, booking_id):
             return redirect('service_provider_dashboard')
     return HttpResponseBadRequest('Invalid form submission')
 
-def _get_service_rating(service):
-    reviews = Review.objects.filter(service=service)
-    if reviews:
-        return sum([review.rating for review in reviews]) / len(reviews), len(reviews)
-    return ()
+    
 
 def service_list_view(request):
-    services = Service.objects.all()
-    services_and_average_rates = {}
-    
-    for service in services:
-        services_and_average_rates[service] = _get_service_rating(service)
+    query = request.GET.get('search')
+    if query:
+        services = Service.objects.filter(name__icontains=query) | Service.objects.filter(location__icontains=query)
+    else:
+        services = Service.objects.all()
+
+    services_and_average_rates = _get_services_and_rating(services)
     
     return render(request, 'service_list.html', {'services_and_rates': services_and_average_rates})
 
@@ -208,6 +227,8 @@ def delete_service_view(request, service_id):
     return redirect('owner_dashboard')
 
 def add_review_view(request, service_id):
+    if request.method == 'GET':
+        return render(request, 'add_review.html', {'service_id': service_id})
     if request.method == 'POST':
         if Review.objects.filter(user=request.user, service=service_id).exists():
             messages.error(request, 'You have already reviewed this service provider.')

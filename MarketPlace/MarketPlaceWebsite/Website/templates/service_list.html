@@ -5,10 +5,13 @@
 {% block content %}
         <h2>Explore our Garages</h2>
         <p>Find the perfect place for your Car</p>
-
+        <form action="{% url 'service_list'  %}" method="GET">
+            <input type="text" id="search" name="search" placeholder="search by name or by location">
+            <button type="submit" class="small_button">Search</button>
+        </form>
         <h2>Garages</h2>
         <section>
-            {% for service, rate_info in services_and_rates.items %}
+            {% for service, rate_info in services_and_rates %}
                 <article>
                     <h3>{{ service.name }}</h3>
                     <p>{{ service.description }}</p>

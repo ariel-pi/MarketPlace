@@ -16,7 +16,8 @@ from .views import (
     service_item_detail_view,
     service_item_update_view,
     service_item_delete_view,
-    about_view
+    about_view,
+
 )
 
 urlpatterns = [
