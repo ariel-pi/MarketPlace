@@ -34,7 +34,8 @@ Click here to see the website in action!
 - User-Friendly Interface: The interface is intuitive and easy to navigate for both users and service providers.
 
 ## DATABASE Scheme
-[Click here](\database_scheme.svg) to view the structure of the database and the relationships between the models
+[Click here](\database_scheme.svg) to view the structure of the database and the relationships between the models.
+
 
 ## Website Customization
 The project is a ready-made website for example, but built in a way that allows you to adapt it to your needs with only a few minor changes:
