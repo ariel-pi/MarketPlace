@@ -12,8 +12,8 @@ Django Service Marketplace Website provides a ready-made website template based 
 - Pillow 10.3.0
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/your-username/your-project.git`
-2. Navigate to the project directory: `cd your-project`
+1. Clone the repository: `git clone https://github.com/ariel-pi/MarketPlace.git`
+2. Navigate to the project directory: `cd MarketPlace`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Run migrations: `python manage.py migrate`
 5. Start the development server: `python manage.py runserver`
@@ -51,8 +51,8 @@ Add/remove fields according to the website you are creating.
 You can see in the project an example of several useful and common field types.
 5. Change the labels in the ServiceItemForm class in the [forms.py](/MarketPlace/MarketPlaceWebsite/Website/forms.py) file.
 They determine how the user will see the fields that he must fill in on your website when creating a new service item
-6. In the current configuration of the website, slots can be ordered by the hour, if you want to change the site so that users can order a service by days (for example for staying in a hotel), look at the view booking_view_check_in_check_out() in views.py.
-don't forget to update the Booking Model in models.py, BookingForm in forms.py and the url in Website/urls.py.
+6. In the current configuration of the website, slots can be ordered by the hour, if you want to change the site so that users can order a service by days (for example for staying in a hotel), look at the view booking_view_check_in_check_out() in [views.py](/MarketPlace/MarketPlaceWebsite/Website/views.py).
+don't forget to update the Booking Model in [models.py](/MarketPlace/MarketPlaceWebsite/Website/models.py), BookingForm in [forms.py](/MarketPlace/MarketPlaceWebsite/Website/forms.py) and the url in Website/urls.py.
 
 
 ## Deployment Notes
