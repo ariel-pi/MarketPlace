@@ -10,6 +10,8 @@
         <p>{{ service.description }}</p>
         <p>Location: {{ service.location }}</p>
         <p> Contact Detailes: {{service.contact_details}}</p>
+        <p> Opening Hours: {{service.opening_time}} - {{service.closing_time}}</p>
+
     
     <a href="{% url 'reviews' service.id %}">View Reviews</a>
 
@@ -22,7 +24,7 @@
             <form method="post" action="{% url 'booking' service.id %}">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="small_button">Book Now</button>
+                <button type="submit" class="small-button">Book Now</button>
             </form>
         
         {% elif not request.user|has_group:"Service Providers" %}

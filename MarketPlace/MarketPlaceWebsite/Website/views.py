@@ -3,26 +3,15 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .models import Service, Booking, Profile, Review, ServiceItem
-from .forms import BookingForm,  ServiceForm, RegistrationForm ,ProfileForm, ServiceItemForm
+from .forms import BookingForm,  ServiceForm, RegistrationForm , ServiceItemForm #,ProfileForm
 from django.contrib.auth import login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseBadRequest
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.contrib.auth.views import PasswordChangeView
-from django.urls import reverse_lazy
-from .forms import UpdateUsernameForm
-from django.contrib.auth.views import PasswordChangeView
-from django.urls import reverse_lazy
-from django.views.generic import UpdateView
-from .forms import UpdateUsernameForm, UpdatePasswordForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 FEATURED_SERVICES_AMOUNT = 3
 
@@ -74,10 +63,9 @@ def register_view(request):
 @login_required
 def profile_view(request):
     profile = request.user.profile
-    form = ProfileForm(instance=profile)
+    # form = ProfileForm(instance=profile)
     service_items = ServiceItem.objects.filter(owner=request.user)
-    print("service items:", service_items)
-    return render(request, 'profile.html', {'form': form, 'profile': profile, 'service_items': service_items})
+    return render(request, 'profile.html', { 'profile': profile, 'service_items': service_items})
 
 @login_required
 def update_username_view(request):
@@ -112,7 +100,52 @@ def booking_view(request, service_id):
     if request.method == 'POST':
         form = BookingForm(request.POST, user=request.user)
         if form.is_valid():
+            date = form.cleaned_data['date']
+            time = form.cleaned_data['time']
             service_item = form.cleaned_data['service_item']
+            client_notes = form.cleaned_data['client_notes']
+            if not _is_valid_time(service, time, date):
+                form.add_error('time', 'Invalid time')
+                return render(request, 'service_detail.html', {'service': service, 'form': form})
+            # Perform any additional validation or processing here
+            if _check_availability(service, date, time):
+                # Create a Booking instance
+                booking = Booking.objects.create(
+                    user=request.user,
+                    date=date,
+                    time=time,
+                    service_item=service_item,
+                    service=service,
+                    status='pending',
+                    client_notes=client_notes,
+                )
+                booking.save()
+                messages.success(request, 'Booking successful! Check your booking history for details.')
+                return redirect('booking_history')
+            else:
+                messages.error(request, 'Booking failed! The service is fully booked.')
+                return render(request, 'service_detail.html', {'service': service, 'form': form})
+        else:
+            messages.error(request, 'Booking failed! Invalid form submission.')
+            return render(request, 'service_detail.html', {'service': service, 'form': form})
+    return render(request, 'service_detail.html', {'service': service, 'form': BookingForm(user=request.user)})
+
+
+"""
+This is an OPTIONAL view that could replace the booking_view function
+It allows the user to select check-in and check-out dates for the booking
+if you want to use this view, you need to update the booking model to include check_in_date and check_out_date fields
+and update the booking_form to include these fields
+and url pattern to point to this view
+"""
+@login_required
+def booking_view_check_in_check_out(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    if request.method == 'POST':
+        form = BookingForm(request.POST, user=request.user)
+        if form.is_valid():
+            service_item = form.cleaned_data['service_item']
+            #optional
             check_in_date = form.cleaned_data['check_in_date']
             check_out_date = form.cleaned_data['check_out_date']
             client_notes = form.cleaned_data['client_notes']
@@ -122,7 +155,7 @@ def booking_view(request, service_id):
                 form.add_error('check_out_date', 'Check-out date must be later than check-in date')
                 return render(request, 'service_detail.html', {'service_provider': service, 'form': form})
 
-            if _check_availability(service, check_in_date, check_out_date):
+            if _check_availability_check_in_check_out(service, check_in_date, check_out_date):
                 # Create a Booking instance
                 booking = Booking.objects.create(
                     user=request.user,
@@ -187,13 +220,40 @@ def service_list_view(request):
     
     return render(request, 'service_list.html', {'services_and_rates': services_and_average_rates})
 
-def _check_availability(service, check_in_date, check_out_date):
+def _is_round_hour(time):
+    return time.minute == 0
+def _is_valid_time(service, time, date):
+    if date < timezone.now().date():
+        return False
+    if date == timezone.now().date() and time < timezone.now().time():
+        return False
+    if time < service.opening_time or time > service.closing_time:
+        return False
+    if not _is_round_hour(time):
+        return False
+    
+    return True
+
+
+def _check_availability(service, date, time):
+    bookings = Booking.objects.filter(service=service)
+    occupied_slots = 0
+    for booking in bookings:
+        if date == booking.date and time == booking.time:
+            occupied_slots += 1
+    return occupied_slots < service.available_spaces
+
+"""
+This is an OPTIONAL function that could replace the _check_availability function
+It used in the booking_view_check_in_check_out function"""
+def _check_availability_check_in_check_out(service, check_in_date, check_out_date):
     bookings = Booking.objects.filter(service=service)
     occupied_in_date = 0
     for booking in bookings:
         if check_in_date < booking.check_out_date and check_out_date > booking.check_in_date:
             occupied_in_date += 1
     return occupied_in_date < service.available_spaces
+
 def service_detail_view(request, service_id):
     service = get_object_or_404(Service, id=service_id)
     form = BookingForm(user=request.user) if request.user.is_authenticated else None

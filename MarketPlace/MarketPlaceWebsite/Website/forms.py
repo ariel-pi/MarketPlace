@@ -7,20 +7,25 @@ from django.contrib.auth.models import User, Group
 
 class BookingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        print("kwargs",kwargs)
         user = kwargs.pop('user')  # Retrieve the user from kwargs
         super().__init__(*args, **kwargs)
         self.fields['service_item'].queryset = ServiceItem.objects.filter(owner=user)  # Filter the service items based on the user
     class Meta:
         model = Booking
-        fields = ['check_in_date', 'check_out_date', 'client_notes', 'service_item']
+        fields = ['date','time', 'client_notes', 'service_item']
+        labels = {
+            'date': 'Date',
+            'time': 'Time - round hours only (e.g. 10:00:00, 11:00:00)',
+            'client_notes': 'Notes',
+            'service_item': 'Service Item',
+        }
 
 
-class ProfileForm(forms.ModelForm):
+# class ProfileForm(forms.ModelForm):
 
-    class Meta:
-        model = Profile
-        fields = ["profile_picture"]
+#     class Meta:
+#         model = Profile
+#         fields = ["profile_picture"]
 
 
 class RegistrationForm(UserCreationForm):
@@ -49,8 +54,7 @@ class RegistrationForm(UserCreationForm):
             user.save()
             # Assign the user to the selected group based on the user_type
             group_name = 'Service Providers' if user_type == 'service_provider' else 'Clients'
-            #TODO: change this  to get
-            group, created = Group.objects.get_or_create(name=group_name)
+            group = Group.objects.get(name=group_name)
             user.groups.add(group)
 
         return user

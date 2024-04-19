@@ -28,13 +28,18 @@
 <body>
 
     <header>
-        <img src="{% static 'img/cars_top_narrow.jpg' %}" alt="Car" class = "header_image">
-        <h1>MotoMatch</h1>
+        <div class="image-container">
+                <img src="{% static 'img/header_image.jpg' %}" alt="Car" class="header_image">
+                <div class="centered-text">
+                    <h1 id = "header_text">MotoMatch</h1>
+                </div>
+        </div>
+
         {% if user.is_authenticated %}
             
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit" class = "small_button">Logout</button>
+                    <button type="submit" class = "small-button">Logout</button>
                 </form>
             
         {% else %}
@@ -66,7 +71,7 @@
 
 <footer>
     <article>
-        <p>&copy; 2021 MotoMatch</p>
+        <p>&copy; 2024 MotoMatch</p>
       </article>
 </footer>
 

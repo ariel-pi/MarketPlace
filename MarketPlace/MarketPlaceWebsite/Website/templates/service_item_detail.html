@@ -17,10 +17,10 @@
     <p><strong>Valid Inspection:</strong> {{ service_item.field_3 }}</p>
   
 </body>
-<a href="{% url 'update_service_item' service_item.identifier %}" class="small_button"></ahref>Update Details</a>
+<a href="{% url 'update_service_item' service_item.identifier %}" class="small-button"></ahref>Update Details</a>
 <form method="post" action="{% url 'delete_service_item' service_item.identifier %}">
     {% csrf_token %}
-    <button type="submit" class = "small_button">Delete</button>
+    <button type="submit" class = "small-button">Delete</button>
   </form>
 </html>
 {% endblock %}

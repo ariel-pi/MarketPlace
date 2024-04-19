@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,3 +130,4 @@ LOGIN_REDIRECT_URL = '/'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/ 'media'
+
