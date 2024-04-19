@@ -34,18 +34,18 @@ Click here to see the website in action!
 - User-Friendly Interface: The interface is intuitive and easy to navigate for both users and service providers.
 
 ## DATABASE Scheme
-[Click here](\database_scheme.svg) to view the structure of the database and the relationships between the models.
+[Click here](/MarketPlace/database_scheme.svg) to view the structure of the database and the relationships between the models.
 
 
 ## Website Customization
 The project is a ready-made website for example, but built in a way that allows you to adapt it to your needs with only a few minor changes:
 1. Update the html files so that they contain your website data, for example replace MotoMatch with your website name, the "about" part of your website description, etc.
-2. Make changes to [style.css](\MarketPlaceWebsite\Website\static\css\style.css) (optional).
-3. Change the [header image](\MarketPlaceWebsite\Website\static\img\header_image.jpg).
-4. change Change the fields in the ServiceItem class in the [models.py](\MarketPlaceWebsite\Website\models.py) file according to the item on which the service is performed (in the example website this is actually the car).
+2. Make changes to [style.css](/MarketPlace/MarketPlaceWebsite/Website/static/css/style.css) (optional).
+3. Change the [header image](/MarketPlace/MarketPlaceWebsite/Website/static/img/header_image.jpg).
+4. change Change the fields in the ServiceItem class in the [models.py](/MarketPlace/MarketPlaceWebsite/Website/models.py) file according to the item on which the service is performed (in the example website this is actually the car).
 Add/remove fields according to the website you are creating.
 You can see in the project an example of several useful and common field types.
-5. Change the labels in the ServiceItemForm class in the [forms.py](\MarketPlaceWebsite\Website\forms.py) file.
+5. Change the labels in the ServiceItemForm class in the [forms.py](/MarketPlace/MarketPlaceWebsite/Website/forms.py) file.
 They determine how the user will see the fields that he must fill in on your website when creating a new service item
 6. In the current configuration of the website, slots can be ordered by the hour, if you want to change the site so that users can order a service by days (for example for staying in a hotel), look at the view booking_view_check_in_check_out() in views.py.
 don't forget to update the Booking Model in models.py, BookingForm in forms.py and the url in Website/urls.py.
