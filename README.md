@@ -20,12 +20,16 @@ Django Service Marketplace Website provides a ready-made website template based 
 
 ## Example Website
 Click here to see the website in action!
-[Visit MotoMatch](https://www.google.com/)
+[Visit MotoMatch](https://www.google.com/)<br>
+### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
+
+### Service Provider Dashboard
+![Screenshot of Service Provider Dashboard](/MarketPlace/screenshots/Screenshot_service_provider_dashboard.png)
 
 ## Features
 - User Authentication: Allows users to register, log in, log out, and update their profile information.
-- Service Management: Service providers can add, edit, and delete services they offer, including service items with unique identifiers.
+- Service Management: Service providers can add, edit, and delete services they offer.
 - Booking System: Users can book services provided by service providers, including selecting service items and specifying booking details.
 - Review System: Users can leave reviews and ratings for service providers after booking their services.
 - Service Provider Dashboard: Service providers have access to a dashboard where they can manage their services, view bookings, and update booking statuses.

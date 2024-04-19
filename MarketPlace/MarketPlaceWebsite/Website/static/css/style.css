@@ -1,6 +1,27 @@
 .logo {
     width: 15vw; 
 }
+.service-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.service-text {
+    width: 85%;
+}
+
+.service-image {
+    padding: 1rem;
+    width: 40vw;
+    height: auto;
+    float: right;
+}
+
+.booking-container {
+    clear: both;
+}
+
 .image-container {
     position: relative;
     text-align: center;

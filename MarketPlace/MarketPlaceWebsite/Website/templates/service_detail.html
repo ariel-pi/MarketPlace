@@ -1,34 +1,36 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
 
-
 {% block title %}{{ service.name }} - MotoMatch{% endblock %}
 
 {% block content %}
-    
+<div class="service-container">
+    <div class="service-text">
         <h2>{{ service.name }}</h2>
         <p>{{ service.description }}</p>
         <p>Location: {{ service.location }}</p>
-        <p> Contact Detailes: {{service.contact_details}}</p>
-        <p> Opening Hours: {{service.opening_time}} - {{service.closing_time}}</p>
+        <p>Contact Details: {{service.contact_details}}</p>
+        <p>Opening Hours: {{service.opening_time}} - {{service.closing_time}}</p>
+        <a href="{% url 'reviews' service.id %}">View Reviews</a>
+    </div>
+    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-image">
+</div>
 
+<div class="booking-container">
     
-    <a href="{% url 'reviews' service.id %}">View Reviews</a>
-
-    
-        <h2>Book a Service</h2>
-        {% if error %}
-            <p class = "error_text">{{ error }}</p>
-        {% endif %}
-        {% if request.user|has_group:"Clients" %}
-            <form method="post" action="{% url 'booking' service.id %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="small-button">Book Now</button>
-            </form>
-        
-        {% elif not request.user|has_group:"Service Providers" %}
-            <p><a href="{% url 'login' %}">Log in</a> to book a service</p>
-        {% endif %}
-    
+    {% if error %}
+        <p class="error_text">{{ error }}</p>
+    {% endif %}
+    {% if request.user|has_group:"Clients" %}
+    <h2>Book a Service</h2>
+        <form method="post" action="{% url 'booking' service.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="small-button">Book Now</button>
+        </form>
+    {% elif not request.user|has_group:"Service Providers" %}
+    <h2>Book a Service</h2>
+        <p><a href="{% url 'login' %}">Log in</a> to book a service</p>
+    {% endif %}
+</div>
 {% endblock %}
