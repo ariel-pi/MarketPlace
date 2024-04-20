@@ -20,7 +20,7 @@ Django Service Marketplace Website provides a ready-made website template based 
 
 ## Example Website
 Click here to see the website in action!
-[Visit MotoMatch](https://www.google.com/)<br>
+[Visit MotoMatch]()<br>
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
 
@@ -38,7 +38,7 @@ Click here to see the website in action!
 - User-Friendly Interface: The interface is intuitive and easy to navigate for both users and service providers.
 
 ## DATABASE Scheme
-[Click here](/MarketPlace/database_scheme.svg) to view the structure of the database and the relationships between the models.
+[Click here](/database_scheme.svg) to view the structure of the database and the relationships between the models.
 
 
 ## Website Customization
