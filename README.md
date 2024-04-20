@@ -20,7 +20,7 @@ Django Service Marketplace Website provides a ready-made website template based 
 
 ## Example Website
 Click here to see the website in action!
-[Visit MotoMatch]()<br>
+[Visit MotoMatch](https://arielp.pythonanywhere.com/)<br>
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
 
@@ -57,11 +57,14 @@ don't forget to update the Booking Model in [models.py](/MarketPlace/MarketPlace
 
 ## Deployment Notes
 
-A A convenient option to deploy the project is by [pythonanywhere](https://www.pythonanywhere.com/).
-Here you can find a guide for deploying a Django project on this platform:<br>
-[Deploy a Django web app to Python Anywhere](https://www.youtube.com/watch?v=xtnUwvjOThg&ab_channel=CloudWithDjango)<br>
-This option is suitable for small projects, such as a university project, etc.
+A A convenient option to deploy the project is by [pythonanywhere](https://www.pythonanywhere.com/).<br>
+This option is suitable for small projects, such as a university project, etc.<br>
 For a commercial website, which is required to handle a large user traffic, we recommend considering alternative options.
+Here you can find a guide for deploying a Django project on pythonanywhere.com:<br>
+[Deploy a Django web app to Python Anywhere](https://www.youtube.com/watch?v=xtnUwvjOThg&ab_channel=CloudWithDjango)<br>
+
+now, for loading yor static files, Check out this guide:
+[Loading static files to pythonanywhere](https://help.pythonanywhere.com/pages/DjangoStaticFiles/)
 
 ## Author
 
