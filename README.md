@@ -18,7 +18,28 @@ Django Service Marketplace Website provides a ready-made website template based 
 4. Run migrations: `python manage.py migrate`
 5. Start the development server: `python manage.py runserver`
 
-## Screenshots
+you can delete the existing service and users by the administration site, for this, you need super user.<br>
+### Creating a superuser in Django and Accessing the Django Admin Panel
+
+1. Open a terminal or command prompt.
+
+2. Navigate to your Django project directory.
+
+3. Run the following command:
+   `python manage.py createsuperuser`
+
+4. Fill in the credentials.
+
+5. Go to http://127.0.0.1:8000/admin
+
+6. Log in with superuser credentials.
+
+7. After successful authentication, you will be redirected to the Django admin panel, where you can manage your Django application's data, including models, users, groups, permissions, and more.
+
+
+
+## Example Website
+[Click here](https://arielpin.pythonanywhere.com/) <b>and watch the site in action!</b>
 
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
