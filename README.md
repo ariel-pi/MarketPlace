@@ -18,7 +18,7 @@ Django Service Marketplace Website provides a ready-made website template based 
 4. Run migrations: `python manage.py migrate`
 5. Start the development server: `python manage.py runserver`
 
-## Example Website
+## Screenshots
 
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
