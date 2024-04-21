@@ -86,7 +86,7 @@ Here you can find a guide for deploying a Django project on pythonanywhere.com:<
 now, for loading yor static files, Check out this guide:
 [Loading static files to pythonanywhere](https://help.pythonanywhere.com/pages/DjangoStaticFiles/)<br>
 You can see [here](settings_for_deployment.py) how setting.py should look after deployment.<br>
-Note that you update the SECRET_KEY and the ALLOWED_HOSTS according to your data.
+Note that you update the SECRET_KEY, ALLOWED_HOSTS and STATIC_ROOT according to your data.
 
 ## Author
 
