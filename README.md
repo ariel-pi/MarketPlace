@@ -19,7 +19,8 @@ Django Service Marketplace Website provides a ready-made website template based 
 5. Start the development server: `python manage.py runserver`
 
 ## Example Website
-
+<b>Click here to see the website in action!</b>
+[Visit MotoMatch](https://arielp.pythonanywhere.com/)<br>
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
 
@@ -63,7 +64,9 @@ Here you can find a guide for deploying a Django project on pythonanywhere.com:<
 [Deploy a Django web app to Python Anywhere](https://www.youtube.com/watch?v=xtnUwvjOThg&ab_channel=CloudWithDjango)<br>
 
 now, for loading yor static files, Check out this guide:
-[Loading static files to pythonanywhere](https://help.pythonanywhere.com/pages/DjangoStaticFiles/)
+[Loading static files to pythonanywhere](https://help.pythonanywhere.com/pages/DjangoStaticFiles/)<br>
+You can see [here](settings_for_deployment.py) how setting.py should look after deployment.<br>
+Note that you update the SECRET_KEY and the ALLOWED_HOSTS according to your data.
 
 ## Author
 
