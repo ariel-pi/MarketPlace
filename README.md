@@ -19,8 +19,7 @@ Django Service Marketplace Website provides a ready-made website template based 
 5. Start the development server: `python manage.py runserver`
 
 ## Example Website
-<b>Click here to see the website in action!</b>
-[Visit MotoMatch](https://arielp.pythonanywhere.com/)<br>
+
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
 
