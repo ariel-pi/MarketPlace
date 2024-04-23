@@ -1,6 +1,6 @@
 # Django Service Marketplace Website
 
-Django Service Marketplace Website provides a ready-made website template based on Django and DTL (Django Template Language), enabling users to create and manage service-based websites with ease.
+The Django Service Marketplace Website offers a sophisticated template utilizing Django and Django Template Language (DTL), facilitating the effortless creation and administration of service-oriented websites. It serves as a streamlined platform that bridges service providers with potential clients. Service providers can enlist their offerings on the site to captivate an audience seeking their services. Conversely, customers may utilize the platform to explore available services, peruse evaluations, and procure a service of their choice.
 
 [![Python Version](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Django Version](https://img.shields.io/badge/django-5.0.4-green.svg)](https://www.djangoproject.com/download/)
