@@ -6,6 +6,8 @@ from django.contrib.auth.models import User, Group
 
 
 class BookingForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')  # Retrieve the user from kwargs
         super().__init__(*args, **kwargs)

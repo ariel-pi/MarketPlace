@@ -36,7 +36,7 @@
         </div>
 
         {% if user.is_authenticated %}
-            
+                <p>Hi, {{user.first_name}}</p>
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit" class = "small-button">Logout</button>
@@ -44,7 +44,8 @@
             
         {% else %}
             
-                <a href="{% url 'login' %}" >Login</a>/<a href="{% url 'register' %}" >Sign Up</a>
+        <a href="{% url 'login' %}" style="font-size: 20px;">Login</a>/<a href="{% url 'register' %}" style="font-size: 20px;">Sign Up</a>
+
         {% endif %}
     </header>
 

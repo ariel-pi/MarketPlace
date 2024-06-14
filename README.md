@@ -1,6 +1,8 @@
 # Django Service Marketplace Website
 
-The Django Service Marketplace Website offers a sophisticated template utilizing Django and Django Template Language (DTL), facilitating the effortless creation and administration of service-oriented websites. It serves as a streamlined platform that bridges service providers with potential clients. Service providers can enlist their offerings on the site to captivate an audience seeking their services. Conversely, customers may utilize the platform to explore available services, peruse evaluations, and procure a service of their choice.
+The Django Service Marketplace Website offers a sophisticated template utilizing Django and Django Template Language (DTL), facilitating the effortless creation and administration of service-oriented websites. It serves as a streamlined platform that bridges service providers with potential clients. Service providers can enlist their offerings on the site to captivate an audience seeking their services. Conversely, customers may utilize the platform to explore available services, peruse evaluations, and procure a service of their choice.</b>
+
+ <span style="font-size:larger;">[Click here](https://tinyurl.com/MotoMatchWebsite) <b>and watch the website in action!</b></span></b>
 
 [![Python Version](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Django Version](https://img.shields.io/badge/django-5.0.4-green.svg)](https://www.djangoproject.com/download/)
@@ -38,8 +40,7 @@ you can delete the existing service and users by the administration site, for th
 
 
 
-## Example Website
-[Click here](https://arielpin.pythonanywhere.com/) <b>and watch the site in action!</b>
+
 
 ### Home Page
 ![Screenshot of Home Page](/MarketPlace/screenshots/Screenshot_home.png)
